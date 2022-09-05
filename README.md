@@ -1,6 +1,6 @@
 # recursive-readdir
 
-[![Build Status](https://travis-ci.org/jergason/recursive-readdir.svg?branch=master)](https://travis-ci.org/jergason/recursive-readdir)
+[![Build Status](https://travis-ci.org/daedalus11069/recursive-readdir.svg?branch=master)](https://travis-ci.org/daedalus11069/recursive-readdir)
 
 Recursively list all files in a directory and its subdirectories. It does not list the directories themselves.
 
@@ -9,7 +9,7 @@ on OS X and Linux, the order of files inside directories is [not guaranteed](htt
 
 ## Installation
 
-    npm install recursive-readdir
+    npm install github:daedalus11069/recursive-readdir
 
 ## Usage
 
@@ -52,16 +52,17 @@ recursive("some/path", ["foo.cs", ignoreFunc], function (err, files) {
 ```
 
 ## Promises
+
 You can omit the callback and return a promise instead.
 
 ```javascript
 var recursive = require("recursive-readdir");
 
 recursive("some/path").then(
-  function(files) {
+  function (files) {
     console.log("files are", files);
   },
-  function(error) {
+  function (error) {
     console.error("something exploded", error);
   }
 );

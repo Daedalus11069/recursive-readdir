@@ -3,7 +3,7 @@ var p = require("path");
 var minimatch = require("minimatch");
 
 function patternMatcher(pattern) {
-  return function(path, stats) {
+  return function (path, stats) {
     var minimatcher = new minimatch.Minimatch(pattern, { matchBase: true });
     return (!minimatcher.negate || stats.isFile()) && minimatcher.match(path);
   };
@@ -24,8 +24,8 @@ function readdir(path, ignores, callback) {
   }
 
   if (!callback) {
-    return new Promise(function(resolve, reject) {
-      readdir(path, ignores || [], function(err, data) {
+    return new Promise(function (resolve, reject) {
+      readdir(path, ignores || [], function (err, data) {
         if (err) {
           reject(err);
         } else {
@@ -39,7 +39,7 @@ function readdir(path, ignores, callback) {
 
   var list = [];
 
-  fs.readdir(path, function(err, files) {
+  fs.readdir(path, function (err, files) {
     if (err) {
       return callback(err);
     }
@@ -50,15 +50,15 @@ function readdir(path, ignores, callback) {
       return callback(null, list);
     }
 
-    files.forEach(function(file) {
+    files.forEach(function (file) {
       var filePath = p.join(path, file);
-      fs.stat(filePath, function(_err, stats) {
+      fs.stat(filePath, function (_err, stats) {
         if (_err) {
           return callback(_err);
         }
 
         if (
-          ignores.some(function(matcher) {
+          ignores.some(function (matcher) {
             return matcher(filePath, stats);
           })
         ) {
@@ -70,7 +70,7 @@ function readdir(path, ignores, callback) {
         }
 
         if (stats.isDirectory()) {
-          readdir(filePath, ignores, function(__err, res) {
+          readdir(filePath, ignores, function (__err, res) {
             if (__err) {
               return callback(__err);
             }
